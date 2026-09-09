@@ -57,6 +57,15 @@ formulario.addEventListener("submit", (evento) => {
     mensagem.textContent = `Horário ${nova.hora} já está ocupado com ${nova.profissional}.`;
     return;
   }
+  function pacienteTemConsultaNoDia(consultas, nova) {
+    return consultas.some(
+        (c) => c.paciente === nova.paciente && c.data === nova.data
+    );
+  }
+
+  if (pacienteTemConsultaNoDia(consultas, nova)) {
+    alert(`${nova.paciente} já tem consulta agendada em ${nova.data}.`);
+  }
 
   consultas.push(nova);
   salvar(consultas);
